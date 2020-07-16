@@ -2,14 +2,14 @@
   "name": "product",
   "version": "1.0.0",
   "main": "server.js",
-  "author": "Emile Nsengimana",
+  "author": "Manzi Fabrice",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/server.js",
     "drop_tables": "sequelize db:migrate:undo:all",
-    "create_tables": "sequelize db:migrate",
+    "create_tables": "sequelize db:migrate && sequelize db:seed:all",
     "start": "node build/server.js",
-    "prod_seeds": "sequelize db:seed --seed 20190722102843-create-admin && sequelize db:seed --seed 20190723161730-create-permission",
+    "prod_seeds": "sequelize db:seed --seed 20190722102843-create-user",
     "build": "yarn create_tables && babel src --out-dir build"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "datauri": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.6.0",
     "image-data-uri": "^2.0.1",
     "jade": "^1.11.0",
     "jsonwebtoken": "^8.5.1",
