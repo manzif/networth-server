@@ -19,6 +19,7 @@ class ProfileManager {
     });
   }
 
+  
   static async updateProfile(req, res) {
     try {
       if (req.file) {
