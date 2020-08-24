@@ -16,7 +16,7 @@ class mail {
    */
   static async sendEmail(user) {
     try {
-      const { username, email } = user;
+      const { username, email} = user;
       const token = Helper.generateToken(user);
       const msg = {
         to: email,
@@ -25,7 +25,7 @@ class mail {
         text: `Dear, ${username} Please use the provided link to reset your password`,
         html: `<div>Dear ${username},<br>You have requested to reset your password.<br></div>
         <a href="${process.env.BACK_END_URL}/newpassword/${token}">Please click here to reset your password</a>
-        <br><h6>Thank you for using Authors haven.</h6>`,
+        <br><h6>Thank you for using networth.</h6>`,
       };
       const sent = sgMail.send(msg);
       return sent;

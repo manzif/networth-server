@@ -39,6 +39,16 @@ const Helper = {
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1d' }
     );
     return token;
+  },
+
+    /**
+   *
+   * @param {object} token
+   * @returns {object} verified token
+   */
+  verifyToken(token) {
+    const verifyToken = jwt.verify(token, process.env.SECRET, { expiresIn: '1d' });
+    return verifyToken;
   }
 }
 
