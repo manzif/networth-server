@@ -44,7 +44,7 @@ class Users {
   static async login(req, res) {
     try {
       const findUser = await User.findOne({ where: { email: req.body.email } });
-
+      
       if (findUser) {
         const userData = {
           id: findUser.dataValues.id,
@@ -62,22 +62,24 @@ class Users {
             email: userData.email,
             role: userData.role,
           }
-
           const token = Helper.generateToken(payload);
           return res.status(200).json({
             message: 'You have been successfully logged in',
+            token: token,
             user: {
-              token,
               email: payload.email,
-              username: payload.username
+              username: payload.username,
+              role: userData.role
             }
           });
         }
-        return res.status(401).json({
+        return res.status(400).json({
+          status: 400,
           message: 'Wrong email or password'
         });
       }
-      return res.status(401).json({
+      return res.status(400).json({
+        status: 400,
         message: 'Wrong email or password'
       });
     } catch (error) {

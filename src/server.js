@@ -1,15 +1,17 @@
 import "babel-polyfill";
-import http from 'http';
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import routes  from './routes';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 
 dotenv.config();
 
 
 const app = express();
+app.use(cors());
 
 app.use(logger('dev')); // log requests to the console
 // Parse incoming requests data
