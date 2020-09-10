@@ -1,6 +1,7 @@
 import model from '../db/models';
 import Helper from '../helper/helper';
 import mail from '../helper/mail';
+import axios from 'axios'
 
 const { User } = model;
 
@@ -83,6 +84,25 @@ class Users {
         message: 'Wrong email or password'
       });
     } catch (error) {
+      return res.status(500).json({
+        message: error.message
+      });
+    }
+  }
+  static async checkId(req, res) {
+    try {
+      const identity = req.body.identity 
+      const downloadUrl = 'http://app.mobicash.rw/rnit-1/check-id'
+      const { data } = await axios({
+        method: 'Post',
+        url: downloadUrl,
+        params: {'identification': identity }})
+
+      return res.status(200).json({
+        identification: data
+      });
+    } catch (error) {
+      console.log('\n\n\n\n\n', error)
       return res.status(500).json({
         message: error.message
       });
